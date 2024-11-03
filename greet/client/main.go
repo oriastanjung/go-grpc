@@ -21,10 +21,10 @@ func main(){
 
 	defer connection.Close()
 	client := pb.NewGreetServiceClient(connection)
-	client_calculator := pb.NewCalculatorServiceClient(connection)
+	// client_calculator := pb.NewCalculatorServiceClient(connection)
 	doGreet(client)
 	callHelloThere(client)
 
-	callSum(client_calculator)
-
+	// callSum(client_calculator)
+	doGreetManyTimes(client)
 }

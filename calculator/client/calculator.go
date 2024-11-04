@@ -34,3 +34,32 @@ func doPrimesManyTimes(client pb.CalculatorServiceClient, input int32){
 	log.Printf("Result : %v ",results)
 
 }
+
+
+
+func doAverage(client pb.CalculatorServiceClient){
+	log.Printf("doAverage is invoked")
+
+	requests := []*pb.AvgRequest{
+		{Number: 1},
+		{Number: 2},
+		{Number: 3},
+		{Number: 4},
+	}
+	stream, err := client.CalculateAvg(context.Background())
+	if err != nil {
+		log.Fatalf("Error on reading stream %v\n",err)
+	}
+	for _, req := range requests{
+		stream.Send(&pb.AvgRequest{
+			Number: req.Number,
+		})
+	}
+
+	res,err := stream.CloseAndRecv()
+	if err != nil{
+		log.Fatalf("Error on getting response %v\n",err)
+	}
+
+	log.Printf("Average from %v is %v",requests,res.AverageResult)
+}

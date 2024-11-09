@@ -64,3 +64,28 @@ func (server *Server) CalculateAvg(stream grpc.ClientStreamingServer[pb.AvgReque
 }
 
 	
+func (server *Server) MaxAPI(stream grpc.BidiStreamingServer[pb.MaxRequest, pb.MaxResponse]) error{
+	log.Printf("MaxAPI RPC is Invoke")
+	currentNumber := 0
+	for{
+		req,err := stream.Recv()
+		if err == io.EOF{
+			return nil
+		}
+		if err != nil{
+			log.Fatalf("Error get requiest from stream %v",err)
+		}
+
+		if currentNumber < int(req.Number){
+			err = stream.Send(&pb.MaxResponse{
+				Result: req.Number,
+			})
+
+			if err!= nil{
+				log.Fatalf("Error on sending response to stream %v", err)
+			}
+
+			currentNumber = int(req.Number)
+		}
+	} 
+}

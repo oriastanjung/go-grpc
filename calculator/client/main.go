@@ -20,9 +20,13 @@ func main(){
 	defer connection.Close()
 
 	client := pb.NewCalculatorServiceClient(connection)
-	doSum(client)
-	doPrimesManyTimes(client,120)
-	doAverage(client)
+	// doSum(client)
+	// doPrimesManyTimes(client,120)
+	// doAverage(client)
+	doMaxAPI(client)
+
+	doSqrt(client, -10)
+
 }
 
 func doSum(client pb.CalculatorServiceClient){

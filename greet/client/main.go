@@ -27,5 +27,6 @@ func main(){
 
 	// callSum(client_calculator)
 	// doGreetManyTimes(client)
-	doLongGreet(client)
+	// doLongGreet(client)
+	doGreetEveryone(client)
 }

@@ -1,6 +1,5 @@
 syntax="proto3";
 
-
 package calculator;
 option go_package="grpc_tutorial/calculator/proto";
 
@@ -29,9 +28,29 @@ message AvgRequest{
 message AvgResponse{
     double average_result=1;
 }
+
+
+message MaxRequest{
+    int32 number=1;
+}
+
+message MaxResponse{
+    int32 result=1;
+}
+
+
+message SQRTRequest{
+    int32 number=1;
+}
+
+message SQRTResponse{
+    int32 result=2;
+}
 service CalculatorService{
     rpc Sum(CalculatorRequest) returns (CalculatorResponse) {};
     rpc Primes(PrimeRequest) returns (stream PrimeResponse){};
     rpc CalculateAvg(stream AvgRequest) returns ( AvgResponse){};
+    rpc MaxAPI(stream MaxRequest) returns (stream MaxResponse){};
+    rpc SQRT(SQRTRequest) returns (SQRTResponse){};
 }
 

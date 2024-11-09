@@ -24,6 +24,7 @@ service GreetService {
     rpc HalloThere(GreetRequest) returns (GreetResponse) {};
     rpc GreetManyTimes(GreetRequest) returns (stream GreetResponse){};
     rpc LongGreet(stream GreetRequest) returns (GreetResponse){};
+    rpc GreetEveryone(stream GreetRequest) returns (stream GreetResponse){};
 }
 
 service CalculatorService {

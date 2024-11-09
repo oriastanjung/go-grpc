@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 )
 
@@ -70,8 +71,9 @@ func doAverage(client pb.CalculatorServiceClient){
 
 func doMaxAPI(client pb.CalculatorServiceClient){
 	log.Println("doMaxAPI invoked")
-
-	stream,err := client.MaxAPI(context.Background())
+	md:=metadata.New(map[string]string{"authorization":"test-token"})
+	ctx := metadata.NewOutgoingContext(context.Background(),md)
+	stream,err := client.MaxAPI(ctx)
 	if err != nil{
 		log.Fatalf("Error while streaming %v",err)
 	}

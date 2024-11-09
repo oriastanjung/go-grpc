@@ -25,7 +25,7 @@ func main(){
 	// doAverage(client)
 	doMaxAPI(client)
 
-	doSqrt(client, -10)
+	// doSqrt(client, -10)
 
 }
 

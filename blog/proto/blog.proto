@@ -1,0 +1,25 @@
+syntax="proto3";
+
+package blog;
+option go_package = "grpc_tutorial/blog/proto";
+import "google/protobuf/empty.proto";
+message Blog {
+    string id = 1;
+    string author_id = 2;
+    string title = 3;
+    string content = 4;
+}
+
+
+message BlogId{
+    string id = 1;
+}
+
+
+service BlogServiceRoutes{
+    rpc CreateOneBlog(Blog) returns (BlogId);
+    rpc GetOneBlog(BlogId) returns (Blog);
+    rpc UpdateOneBlog(Blog) returns (google.protobuf.Empty) {};
+    rpc DeleteOneBlog(BlogId) returns (google.protobuf.Empty){};
+    rpc GetAllBlogs(google.protobuf.Empty) returns (stream Blog){};
+}
